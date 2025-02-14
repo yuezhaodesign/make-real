@@ -195,6 +195,38 @@ export function createTextbox(editor: Editor, label: string, size: string, sourc
 				return contentTextboxId
 			}
 		}
+		else if (source == 'toolbar') {
+			if (label == 'Prompt') {
+				const { currentPagePoint } = editor.inputs
+				const promptTextboxIdToolbar = createShapeId()
+
+				textboxLabel = createTextboxLabel(editor, currentPagePoint.x, currentPagePoint.y, label)
+				textboxArea = createTextboxArea(editor, currentPagePoint.x, currentPagePoint.y + gap, size, promptTextboxColor)
+
+				// Change the tool back to 'Select'
+				editor.setCurrentTool('select')
+
+				// Select and group the text box and its label
+				editor.groupShapes([textboxLabel, textboxArea], {
+					groupId: promptTextboxIdToolbar,
+					select: true
+				})
+
+				// Lock the "Prompt" label
+				editor.toggleLock([textboxLabel])
+
+				// Add metadata about textbox type
+				editor.updateShape({
+					id: promptTextboxIdToolbar,
+					type: 'group',
+					meta: {
+						textboxType: 'Prompt'
+					}
+				})
+
+				// editor.setEditingShape(textboxArea)
+			}
+		}
 	}
 	else {
 		if (

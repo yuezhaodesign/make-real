@@ -1,8 +1,6 @@
 import {
-	TldrawUiIcon,
 	track,
 	useEditor,
-	Editor,
 } from 'tldraw'
 
 import 'tldraw/tldraw.css'
@@ -12,7 +10,8 @@ import {
 	IconMessageBolt,
 	IconZoomInArea,
 	IconCopyPlus,
-	IconTrash
+	IconTrash,
+	IconSend2
 } from '@tabler/icons-react';
 
 import { createPromptTextbox, createPromptReponseTextbox, createTextbox } from './Textboxes'
@@ -48,7 +47,6 @@ const defaultTextboxToolbarActions = [
 	},
 	{
 		title: 'Delete',
-		// icon: '🗑️'
 		icon: <IconTrash color='#E03131' stroke={2} />
 	}
 ] as const
@@ -56,7 +54,11 @@ const defaultTextboxToolbarActions = [
 const promptTextboxToolbarActions = [
 	{
 		title: 'Send',
-		icon: '➡️'
+		icon: <IconSend2 stroke={2} />
+	},
+	{
+		title: 'Delete',
+		icon: <IconTrash color='#E03131' stroke={2} />
 	}
 ]
 
@@ -206,6 +208,7 @@ export const ContextToolbar = track(() => {
 							<div
 								key={title}
 								title={title}
+								className='context-toolbar'
 								style={{
 									display: 'flex',
 									alignItems: 'center',
@@ -219,6 +222,9 @@ export const ContextToolbar = track(() => {
 								onClick={() => {
 										if (title == 'Send') {
 											createPromptReponseTextbox(editor, 'l', undefined, 'Qui deserunt magna enim ad. Ad magna dolor mollit ad nostrud.')
+										}
+										else if (title == 'Delete') {
+											editor.deleteShape(selectedShape)
 										}
 									}
 								}

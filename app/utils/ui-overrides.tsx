@@ -29,7 +29,7 @@ export const uiOverrides: TLUiOverrides = {
 			id: 'prompt',
 			icon: 'group',
 			label: 'Prompt Textbox',
-			kbd: 'v',
+			kbd: 'p',
 			onSelect: () => {
 				editor.setCurrentTool('prompt')
 			}

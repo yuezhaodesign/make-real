@@ -24,6 +24,6 @@ export class PromptTextBoxTool extends StateNode {
 
 	override onPointerDown() {
 		// Add source: 'toolbar'
-		createPromptTextbox(this.editor, 'm')
+		createPromptTextbox(this.editor, 'm', 'toolbar')
 	}
 }
