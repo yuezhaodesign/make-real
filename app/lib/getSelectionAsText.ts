@@ -1,4 +1,4 @@
-import { Editor, TLGeoShape, TLTextShape } from '@tldraw/tldraw'
+import { Editor, TLGeoShape, TLTextShape } from 'tldraw'
 
 export function getSelectionAsText(editor: Editor) {
 	const selectedShapeIds = editor.getSelectedShapeIds()
@@ -21,14 +21,14 @@ export function getSelectionAsText(editor: Editor) {
 			// top first, then left, based on page position
 			const pageBoundsA = editor.getShapePageBounds(a)!
 			const pageBoundsB = editor.getShapePageBounds(b)!
-
+			
 			return pageBoundsA.y === pageBoundsB.y
-				? pageBoundsA.x < pageBoundsB.x
-					? -1
-					: 1
-				: pageBoundsA.y < pageBoundsB.y
-				? -1
-				: 1
+			? pageBoundsA.x < pageBoundsB.x
+			? -1
+			: 1
+			: pageBoundsA.y < pageBoundsB.y
+			? -1
+			: 1
 		})
 		.map((shape) => {
 			if (!shape) return null

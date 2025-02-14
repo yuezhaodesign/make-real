@@ -1,24 +1,33 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import '@tldraw/tldraw/tldraw.css'
-import { MakeRealButton } from './components/MakeRealButton'
-import { TldrawLogo } from './components/TldrawLogo'
-import { RiskyButCoolAPIKeyInput } from './components/RiskyButCoolAPIKeyInput'
-import { PreviewShapeUtil } from './PreviewShape/PreviewShape'
+import 'tldraw/tldraw.css'
 
-const Tldraw = dynamic(async () => (await import('@tldraw/tldraw')).Tldraw, {
+import { components, uiOverrides } from './utils/ui-overrides'
+import { TextBoxTool, PromptTextBoxTool } from './utils/custom-tools'
+import { FrameButtonsUtil } from './components/FrameButtons'
+// import { ContainerShapeUtil } from './components/AutoLayoutFrame'
+
+const Tldraw = dynamic(async () => (await import('tldraw')).Tldraw, {
 	ssr: false,
 })
 
-const shapeUtils = [PreviewShapeUtil]
-
 export default function App() {
 	return (
-		<div className="editor">
-			<Tldraw persistenceKey="make-real" shareZone={<MakeRealButton />} shapeUtils={shapeUtils}>
-				<TldrawLogo />
-				<RiskyButCoolAPIKeyInput />
+		<div className='editor'>
+			<Tldraw persistenceKey='make-real'
+				// Pass in the array of custom shape classes
+				shapeUtils={[FrameButtonsUtil]}
+
+				// Pass in the array of custom tool classes
+				tools={[TextBoxTool, PromptTextBoxTool]}
+
+				// Pass in any overrides to the user interface
+				overrides={uiOverrides}
+
+				// Pass in the new Keyboard Shortcuts component
+				components={components}
+			>
 			</Tldraw>
 		</div>
 	)
