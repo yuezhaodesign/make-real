@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES2020", // Updated from ES2015 to ES2020
+    "module": "ESNext", // Preserved from the original
     "lib": [
       "dom",
       "dom.iterable",
@@ -11,12 +12,14 @@
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "bundler", // Preserved from the original
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "forceConsistentCasingInFileNames": true, // Added from the new config
+    "outDir": "./dist", // Added from the new config
+    "rootDir": "./src", // Added from the new config
     "plugins": [
       {
         "name": "next"
